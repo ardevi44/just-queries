@@ -1,0 +1,45 @@
+ALTER TABLE employers
+MODIFY COLUMN is_hiring BOOLEAN DEFAULT FALSE;
+
+ALTER TABLE conversations
+MODIFY COLUMN date_sent TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE users
+MODIFY COLUMN full_name VARCHAR(300);
+
+ALTER TABLE users
+MODIFY COLUMN full_name VARCHAR(300) NOT NULL,
+  MODIFY COLUMN current_status ENUM('employed', 'self-employed', 'unemployed') NOT NULL;
+
+ALTER TABLE users
+ADD COLUMN id INT PRIMARY KEY AUTO_INCREMENT FIRST;
+
+ALTER TABLE employers
+ADD CONSTRAINT positive_yearly_revenue CHECK (yearly_revenue > 0);
+
+ALTER TABLE employers
+ADD COLUMN id INT PRIMARY KEY AUTO_INCREMENT FIRST;
+
+ALTER TABLE conversations
+ADD COLUMN user_id INT FIRST,
+  ADD COLUMN employer_id INT FIRST;
+
+ALTER TABLE conversations
+ADD COLUMN id INT PRIMARY KEY AUTO_INCREMENT FIRST;
+
+-- First need to remove the PRIMARY KEY constraint
+ALTER TABLE conversations DROP PRIMARY KEY,
+  DROP COLUMN id;
+
+ALTER TABLE conversations DROP COLUMN user_name,
+  DROP COLUMN employer_name;
+
+-- ** This is a script to check for CHECK constraints in a certain table
+-- SELECT tc.CONSTRAINT_NAME,
+--   cc.CHECK_CLAUSE
+-- FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc
+--   JOIN INFORMATION_SCHEMA.CHECK_CONSTRAINTS cc ON tc.CONSTRAINT_SCHEMA = cc.CONSTRAINT_SCHEMA
+--   AND tc.CONSTRAINT_NAME = cc.CONSTRAINT_NAME
+-- WHERE tc.CONSTRAINT_SCHEMA = 'talently'
+--   AND tc.TABLE_NAME = 'conversations'
+--   AND tc.CONSTRAINT_TYPE = 'CHECK';
