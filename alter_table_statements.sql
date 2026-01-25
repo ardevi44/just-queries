@@ -43,3 +43,17 @@ ALTER TABLE conversations DROP COLUMN user_name,
 -- WHERE tc.CONSTRAINT_SCHEMA = 'talently'
 --   AND tc.TABLE_NAME = 'conversations'
 --   AND tc.CONSTRAINT_TYPE = 'CHECK';
+ALTER TABLE users DROP COLUMN full_name;
+
+ALTER TABLE users
+ADD COLUMN first_name VARCHAR(200) NOT NULL
+AFTER id;
+
+ALTER TABLE users
+ADD COLUMN last_name VARCHAR(200) NOT NULL
+AFTER first_name;
+
+-- Adding generated column
+ALTER TABLE users
+ADD COLUMN full_name VARCHAR(401) GENERATED ALWAYS AS (CONCAT(first_name, ' ', last_name))
+AFTER last_name;

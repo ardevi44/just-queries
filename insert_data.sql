@@ -35,3 +35,11 @@ VALUES (
     'Hi, I like Learning!',
     '2021-10-15 16:32:10'
   );
+
+INSERT INTO users (
+    first_name,
+    last_name,
+    yearly_salary,
+    current_status
+  )
+VALUES ("Max", "Schwarz", 19000, 'self-employed');
