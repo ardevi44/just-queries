@@ -1,0 +1,4 @@
+DELETE FROM
+  sales
+WHERE
+  id = 12;
