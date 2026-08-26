@@ -1,3 +1,5 @@
+CREATE DATABASE sales_example;
+
 -- This queries stand for "sales_example" database
 CREATE TABLE sales (
   id SERIAL PRIMARY KEY,
@@ -11,3 +13,8 @@ CREATE TABLE sales (
   is_recurring BOOLEAN DEFAULT FALSE,
   is_disputed BOOLEAN DEFAULT FALSE
 );
+
+SELECT
+  *
+FROM
+  sales;

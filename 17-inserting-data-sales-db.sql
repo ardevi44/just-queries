@@ -1,3 +1,6 @@
+-- These inserts are for the sales_example database which was created in the
+-- '16-basic-table-setup.sql' file and is a little bit of dummy data for the
+-- sales table.
 INSERT INTO
   sales (
     customer_name,
@@ -133,3 +136,5 @@ VALUES
     FALSE,
     FALSE
   );
+
+-- 9999999.999
